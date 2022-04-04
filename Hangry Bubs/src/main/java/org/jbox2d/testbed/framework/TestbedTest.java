@@ -867,11 +867,11 @@ public abstract class TestbedTest
     bomb.setLinearVelocity(velocity);
 
     CircleShape circle = new CircleShape();
-    circle.m_radius = 0.3f;
+    circle.m_radius = 1f;
 
     FixtureDef fd = new FixtureDef();
     fd.shape = circle;
-    fd.density = 20f;
+    fd.density = 10f;
     fd.restitution = 0;
 
     Vec2 minV = new Vec2(position);
