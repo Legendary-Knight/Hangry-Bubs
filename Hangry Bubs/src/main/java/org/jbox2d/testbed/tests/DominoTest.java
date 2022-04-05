@@ -76,7 +76,7 @@ public class DominoTest extends TestbedTest {
     {
     	for(float j=0; j<=24; j+=6)
 	    	for(float i=-24+(j/2);i<=24-(j/2);i+=6) {
-	    		box(3.0f,3.0f,.25f,i,j+((j/3)*.25f));
+	    		box(3.0f,3.0f,.3f,i,j+((j/3)*.3f));
 	    	}
     	//bd.angle = (float)Math.PI/2;
     	/*
@@ -261,7 +261,7 @@ public class DominoTest extends TestbedTest {
       fd = new FixtureDef();
       sd = new PolygonShape();
       sd.setAsBox(thickness, width);
-      fd.shape = sd;
+      fd.shape = sd; 
       fd.density = 50.0f;
       bd = new BodyDef();
       bd.type = BodyType.DYNAMIC;
