@@ -40,6 +40,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.pooling.arrays.IntArray;
 import org.jbox2d.pooling.arrays.Vec2Array;
 import org.jbox2d.testbed.pooling.ColorPool;
+import org.jbox2d.testbed.tests.MediumWoodBlock;
 import org.jbox2d.testbed.tests.RedBird;
 
 // pooling local, not thread-safe
@@ -148,10 +149,26 @@ public class DebugDrawJ2D extends DebugDraw {
 
 	    // inside
 	  
-	  	System.out.println("birb");
-	    Graphics g = getGraphics();
+	  	//System.out.println("birb");
+	    Graphics2D g = getGraphics();
 	    RedBird rb = new RedBird((int) x,(int) y);
 		rb.paint(g);
+	    // outside
+
+  }
+  public void drawWoodBlock(float x,float y) {
+
+	    // inside
+	  	
+	  	
+	  	Graphics2D g = getGraphics2D();
+	  	if(g==null) {
+	  		System.out.println("oof");
+	  	}
+	  	else{
+		    MediumWoodBlock MWB = new MediumWoodBlock((int) x,(int) y);
+			MWB.paint(g);
+	  	}
 	    // outside
 
   }
@@ -170,8 +187,13 @@ public class DebugDrawJ2D extends DebugDraw {
 
   private Graphics2D getGraphics() {
     return panel.getDBGraphics();
+    
   }
-
+  
+  private Graphics2D getGraphics2D()
+  {
+	  return panel.get2DGraphics();
+  }
   private final Vec2 temp2 = new Vec2();
 
   @Override

@@ -13,7 +13,7 @@ public class Background{
 	private double x =0,y=0;
 	private double scale =.12;
 	public Background(int x, int y) {
-		img = getImage("/imgs/Red_Bird.png"); //load the image for Tree
+		img = getImage("/imgs/Red Bird.png"); //load the image for Tree
 		this.x=x;
 		this.y=y;
 

@@ -27,14 +27,19 @@ import java.awt.Graphics;
 import java.util.Scanner;
 
 import org.jbox2d.callbacks.DebugDraw;
+import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
+import org.jbox2d.testbed.framework.TestbedModel;
 import org.jbox2d.testbed.framework.TestbedTest;
+import org.jbox2d.testbed.framework.j2d.DebugDrawJ2D;
+import org.jbox2d.testbed.framework.j2d.TestPanelJ2D;
 
+import java.awt.AWTError;
 import java.awt.Color; 
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -58,6 +63,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class DominoTest extends TestbedTest  {
+	final TestbedModel TBM = new TestbedModel();
+	final TestPanelJ2D TPJ = new TestPanelJ2D(TBM);
+	final DebugDrawJ2D draw = new DebugDrawJ2D(TPJ);
 
   @Override
   public boolean isSaveLoadEnabled() {
@@ -65,6 +73,7 @@ public class DominoTest extends TestbedTest  {
   }
 
   public void initTest(boolean argDeserialized) {
+
     if(argDeserialized){
       return;
     }
@@ -72,11 +81,11 @@ public class DominoTest extends TestbedTest  {
     { // Floor
       FixtureDef fd = new FixtureDef();
       PolygonShape sd = new PolygonShape();
-      sd.setAsBox(50.0f, 10.0f);
+      sd.setAsBox(100.0f, 40.0f);
       fd.shape = sd;
 
       BodyDef bd = new BodyDef();
-      bd.position = new Vec2(0.0f, -10.0f);
+      bd.position = new Vec2(0.0f, -40.0f);
       getWorld().createBody(bd).createFixture(fd);
 
     }
@@ -98,12 +107,26 @@ public class DominoTest extends TestbedTest  {
     }
 
     {
+    
     	for(float j=0; j<=24; j+=8) {
 	    	for(float i=-24+j;i<=24-(j);i+=8) {
 	    		box(4.0f,4.0f,.3f,i,j+((j/3)*.3f));
 	    	}
     	}
-    	
+    	BodyDef bd = new BodyDef();
+        bd.type = BodyType.DYNAMIC;
+        bd.position.set(10f, 10f);
+        bd.bullet = true;
+        Body myBody = getWorld().createBody(bd);
+        CircleShape circle = new CircleShape();
+        circle.m_radius = 1f;
+
+        FixtureDef fd = new FixtureDef();
+        fd.shape = circle;
+        fd.density = 10f; 
+        fd.restitution = 0;
+        myBody.createFixture(fd);
+    	//draw.drawWoodBlock(0, 0);
 
 
 
@@ -114,7 +137,7 @@ public class DominoTest extends TestbedTest  {
       PolygonShape sd = new PolygonShape();
       sd.setAsBox(thickness, height);
       fd.shape = sd;
-      fd.density = 100.0f;
+      fd.density = 30.0f;
       BodyDef bd = new BodyDef();
       bd.type = BodyType.DYNAMIC;
       float friction = .5f;
@@ -122,6 +145,8 @@ public class DominoTest extends TestbedTest  {
       fd.friction = friction;
       bd.position = new Vec2(x+(thickness), y+height);
       bd.angle = 0;
+      //MediumWoodBlock mwb = new MediumWoodBlock(bd,0,0);
+      //mwb.paint(g);
       Body myBody = getWorld().createBody(bd);
       myBody.createFixture(fd);
       
@@ -130,7 +155,7 @@ public class DominoTest extends TestbedTest  {
       sd = new PolygonShape();
       sd.setAsBox(thickness, height);
       fd.shape = sd;
-      fd.density = 100.0f;
+      fd.density = 30.0f;
       bd = new BodyDef();
       bd.type = BodyType.DYNAMIC;
       System.out.println(friction);
@@ -145,7 +170,7 @@ public class DominoTest extends TestbedTest  {
       sd = new PolygonShape();
       sd.setAsBox(thickness, width); 
       fd.shape = sd;  
-      fd.density = 100.0f;
+      fd.density = 30.0f;
       bd = new BodyDef();
       bd.type = BodyType.DYNAMIC;
       System.out.println(friction);
@@ -154,6 +179,7 @@ public class DominoTest extends TestbedTest  {
       bd.angle = (float)Math.PI/2;
       myBody = getWorld().createBody(bd);
       myBody.createFixture(fd);
+      
   }
   @Override
   public String getTestName() {

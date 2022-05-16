@@ -25,6 +25,8 @@ package org.jbox2d.testbed.framework.j2d;
 
 import java.awt.AWTError;
 
+
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -50,7 +52,9 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.testbed.framework.TestbedModel;
 import org.jbox2d.testbed.framework.TestbedPanel;
 import org.jbox2d.testbed.framework.TestbedTest;
+import org.jbox2d.testbed.tests.MediumWoodBlock;
 import org.jbox2d.testbed.tests.RedBird;
+import org.jbox2d.testbed.tests.SlingShot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.awt.Image;
@@ -70,6 +74,8 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
 
   private Graphics2D dbg = null;
   private Image dbImage = null;
+  private Graphics2D gr = null;
+ // MediumWoodBlock M = new MediumWoodBlock();
 
   private int panelWidth;
   private int panelHeight;
@@ -79,15 +85,22 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
 
   private final Vec2 dragginMouse = new Vec2();
   private boolean drag = false;
+  private float x,y;
+  private TestbedTest tests;
+  private int count=0;
+  //private boolean bird=true;
+  
 
   public TestPanelJ2D(TestbedModel argModel) {
-	
+	System.out.println("sjhajdsahd");
     setBackground(Color.black);
     draw = new DebugDrawJ2D(this);
     model = argModel;
     updateSize(INIT_WIDTH, INIT_HEIGHT);
     setPreferredSize(new Dimension(INIT_WIDTH, INIT_HEIGHT));
-
+    
+    
+    
     addMouseWheelListener(new MouseWheelListener() {
 
       private final Vec2 oldCenter = new Vec2();
@@ -99,7 +112,9 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
         DebugDraw d = draw;
         int notches = e.getWheelRotation();
         TestbedTest currTest = model.getCurrTest();
+
         if (currTest == null) {
+        	System.out.println("curr test is null");
           return;
         }
         OBBViewportTransform trans = (OBBViewportTransform) d.getViewportTranform();
@@ -122,6 +137,8 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
         currTest.setCachedCameraPos(d.getViewportTranform().getCenter());
       }
     });
+    
+    
 
     addMouseListener(new MouseAdapter() {
       @Override
@@ -159,13 +176,41 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
     });
   }
 
+  
+  
+ 
+  
+  
   @Override
   public DebugDraw getDebugDraw() {
+	render();
     return draw;
   }
 
   public Graphics2D getDBGraphics() {
     return dbg;
+  }
+  public Graphics2D get2DGraphics() {	
+	  Image tempImage = null;
+		try {
+			URL imageURL = MediumWoodBlock.class.getResource("/imgs/Medium Wood Plank.png");
+			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+		} catch (Exception e) {
+			System.out.println("goof");
+			e.printStackTrace();
+		}
+	  Image img = tempImage;
+      if (img == null) {
+        System.out.println("fail");
+        return gr;
+      }
+      else {
+    	  gr = (Graphics2D) img.getGraphics();
+	  	if(gr==null) {
+	  		System.out.println("oofer");
+	  	}
+	  return gr;
+      }
   }
 
   private void updateSize(int argWidth, int argHeight) {
@@ -187,9 +232,33 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
       }
       dbg = (Graphics2D) dbImage.getGraphics();
     }
+    count++;
+    if(model == null) {
+    	System.out.println("model is null");
+    }
+    else if(count>100&&count<100) {
+    	
+    }
+    else {
+    	double xy[] = model.getXY();
+    	System.out.println(xy[0] + ", " + xy[1]);
+    	count=0;
+    	
+    }
+    double xy[] = model.getXY();
     dbg.setColor(Color.black);
     dbg.fillRect(0, 0, panelWidth, panelHeight);
-   
+    dbg.setColor(Color.blue);
+    dbg.fillOval(30, 30, 30, 30);
+    SlingShot ss = new SlingShot(100,490);
+    ss.paint(dbg);
+    RedBird rb = new RedBird((int) xy[0],(int) xy[1]);
+	rb.paint(dbg);
+    
+     //System.out.println("ooga");
+	if(gr==null) {
+  		//System.out.println("booga");
+  	}
     return true;
   }
   private Image getImage(String path) {
@@ -202,6 +271,20 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
 		}
 		return tempImage;
 	}
+  public void paintRB(float X, float Y, boolean Bird) {
+	  //System.out.println("RBS");
+	  x=X;
+	  y=Y;
+	  /*
+	  try {
+		  Graphics g = this.getGraphics();
+		  draw.drawRedBird(x, y);
+	  }
+	  catch (AWTError e) {
+	      log.error("Graphics context error", e);
+	   }
+	   */
+  }
   public void paintScreen() {
     try {
     	
@@ -211,8 +294,12 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
 //    	Image img = getImage("/imgs/Red_Bird.png");
 //    	AffineTransform tx = AffineTransform.getTranslateInstance(0, 0);
 //    	g.drawImage(img, 0,0, null);
+    	//System.out.println(x + " " + y);
+    		
+    	//draw.drawRedBird(0, 0);
+    	//draw.drawWoodBlock(0, 0);
+    	
 
-    	//draw.drawRedBird();
     	
         g.drawImage(dbImage, 0, 0, null);
         

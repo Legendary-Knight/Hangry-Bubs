@@ -9,11 +9,18 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class RedBird{
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.testbed.framework.TestbedModel;
+import org.jbox2d.testbed.framework.j2d.DebugDrawJ2D;
+import org.jbox2d.testbed.framework.j2d.TestPanelJ2D;
+
+public class SlingShot{
 	private Image img; 	
 	private AffineTransform tx;
 	private double x =0,y=0;
-	private double scale =.12;
+	private double scale =.1;
+	private Graphics2D G2;
 	
 	public double getX() {
 		return x; 
@@ -41,12 +48,24 @@ public class RedBird{
 		this.scale = scale;
 	}
 
-	public RedBird(int x, int y) {
-		//System.out.println("redBird");
-		img = getImage("/imgs/Red Bird.png"); //load the image for Tree
-		this.x=x+520;
-		this.y=y+180;
+	public SlingShot(BodyDef B, int x, int y) {
+		//System.out.println("MediumWoodBlock");
+		img = getImage("/imgs/Slingshot.png"); //load the image for Tree
+		this.x=x;
+		this.y=y;
 
+		tx = AffineTransform.getTranslateInstance(0, 0);
+		update(); 				//initialize the location of the image
+									//use your variables
+	}
+	
+	public SlingShot(int x, int y) {
+		//System.out.println("redBird");
+		img = getImage("/imgs/Slingshot.png"); //load the image for Tree
+		this.x=x;
+		this.y=y;
+		//Graphics2D g2 = (Graphics2D) g;
+		//G2 = g2;
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		update(); 				//initialize the location of the image
 									//use your variables
@@ -57,13 +76,19 @@ public class RedBird{
 		update();
 	}
 	
-	public void paint(Graphics g) {
+	public void paint(Graphics2D g) {
 		//these are the 2 lines of code needed draw an image on the screen
+		//private Graphics2D dbg = null;
+		//Graphics g = dbg.getGraphics();
 		//System.out.println("paintRedBird");
-		Graphics2D g2 = (Graphics2D) g;
-		//System.out.println("OOGA");
-		g2.drawImage(img, tx, null);
-		//System.out.println("bOOGA");
+		//Graphics2D g2 = (Graphics2D) g;
+		//final TestbedModel TBM = new TestbedModel();
+		//final TestPanelJ2D TPJ = new TestPanelJ2D(TBM);
+		//final DebugDrawJ2D draw = new DebugDrawJ2D(TPJ);
+		//Graphics g = TPJ.getGraphics();
+		//Graphics2D g2 = (Graphics2D) g;
+
+		g.drawImage(img, tx, null);
 		update();
 		
 	}
@@ -81,7 +106,7 @@ public class RedBird{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = RedBird.class.getResource(path);
+			URL imageURL = SlingShot.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();

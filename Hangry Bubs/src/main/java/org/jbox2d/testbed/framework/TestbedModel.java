@@ -126,6 +126,36 @@ public class TestbedModel {
     }
   }
 
+  public String getPos() {
+	  if(test==null) {
+		  System.out.println("test in model is null");
+		  return null;
+	  }
+	  else {	
+		  return test.pos();
+	  }
+  }
+  
+  public double[] getXY() {
+	  if(getPos()==null) {
+		  System.out.println("test in model is null");
+		  return null;
+	  }
+	  else {
+		  String str = getPos();
+		  double x= Double.parseDouble(str.substring(1,str.indexOf(",")));
+		  double y= Double.parseDouble(str.substring(1+str.indexOf(","),str.length()-1));
+		  
+		  x+=30;
+		  y+=21;		
+		  x*=600/60;
+		  y=624-(y*624/62);
+		  
+		  double[] xy = {x,y};
+		  return xy;
+	  }
+  }
+  
   public int getCurrTestIndex() {
     return currTestIndex;
   }
