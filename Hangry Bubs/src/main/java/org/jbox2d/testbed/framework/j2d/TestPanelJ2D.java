@@ -232,6 +232,7 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
       }
       dbg = (Graphics2D) dbImage.getGraphics();
     }
+    /*
     count++;
     if(model == null) {
     	System.out.println("model is null");
@@ -240,27 +241,32 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
     	
     }
     else {
-    	double xy[] = model.getXY();
+    	double xy[] = model.getXY(0);
     	System.out.println(xy[0] + ", " + xy[1]);
     	count=0;
-    	
+    	 
     }
-    double xy[] = model.getXY();
+    */
+    
     dbg.setColor(Color.black);
     dbg.fillRect(0, 0, panelWidth, panelHeight);
     dbg.setColor(Color.blue);
     dbg.fillOval(30, 30, 30, 30);
     SlingShot ss = new SlingShot(100,490);
     ss.paint(dbg);
-    RedBird rb = new RedBird((int) xy[0],(int) xy[1]);
+    double xya[] = model.getXYA(0);
+    RedBird rb = new RedBird((int) xya[0],(int) xya[1]);
 	rb.paint(dbg);
-    
+	
+	double xyaB[] = model.getXYA(4);
+	MediumWoodBlock mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]);
+    mwb.paint(dbg);
      //System.out.println("ooga");
 	if(gr==null) {
   		//System.out.println("booga");
   	}
     return true;
-  }
+  } 
   private Image getImage(String path) {
 		Image tempImage = null;
 		try {

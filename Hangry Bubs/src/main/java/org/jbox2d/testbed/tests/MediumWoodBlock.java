@@ -19,7 +19,7 @@ public class MediumWoodBlock{
 	private Image img; 	
 	private AffineTransform tx;
 	private double x =0,y=0;
-	private double scale =.75;
+	private double scale =.50;
 	private Graphics2D G2;
 	
 	public double getX() {
@@ -48,22 +48,12 @@ public class MediumWoodBlock{
 		this.scale = scale;
 	}
 
-	public MediumWoodBlock(BodyDef B, int x, int y) {
-		//System.out.println("MediumWoodBlock");
-		img = getImage("/imgs/Medium Wood Plank.png"); //load the image for Tree
-		this.x=x;
-		this.y=y;
-
-		tx = AffineTransform.getTranslateInstance(0, 0);
-		update(); 				//initialize the location of the image
-									//use your variables
-	}
 	
 	public MediumWoodBlock(int x, int y) {
 		//System.out.println("redBird");
 		img = getImage("/imgs/Medium Wood Plank.png"); //load the image for Tree
-		this.x=x;
-		this.y=y;
+		this.x=x+520;
+		this.y=y+180;
 		//Graphics2D g2 = (Graphics2D) g;
 		//G2 = g2;
 		tx = AffineTransform.getTranslateInstance(0, 0);

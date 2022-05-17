@@ -570,10 +570,32 @@ public abstract class TestbedTest
   private final List<String> statsList = new ArrayList<String>();
   
   public String pos() {
-	  String str = m_world.getBodyList().getPosition().toString();
+	  String str="";
+	  if(m_world.getBodyList().m_next!=null) {
+		  str = m_world.getBodyList().m_next.getPosition().toString();
+	  }
+	  else if(m_world.getBodyList() != null) {
+		  System.out.println("bodylist exists");
+		  str = m_world.getBodyList().getPosition().toString();
+	  }
+	  else {
+		  System.out.println("previous is null");
+	  }
 	  //System.out.println(str);
+	  
 	  return str;
 	  
+  }
+  
+  public String posIndex(int index) {
+	  String str="";
+	  Body b= m_world.getBodyList();
+	  for(int i=0; i<index; i++) {
+		  b= b.m_next;
+	  }
+	  str = b.getPosition().toString();
+	  str =str+  "*" + b.getAngle();
+	  return str;
   }
   
   public synchronized void step(TestbedSettings settings) {

@@ -126,33 +126,38 @@ public class TestbedModel {
     }
   }
 
-  public String getPos() {
+  public String getPos(int index) {
 	  if(test==null) {
 		  System.out.println("test in model is null");
 		  return null;
 	  }
 	  else {	
-		  return test.pos();
+		  return test.posIndex(index);
 	  }
   }
   
-  public double[] getXY() {
-	  if(getPos()==null) {
+  public double[] getXYA(int index) {
+	  if(getPos(index)==null) {
 		  System.out.println("test in model is null");
 		  return null;
 	  }
 	  else {
-		  String str = getPos();
-		  double x= Double.parseDouble(str.substring(1,str.indexOf(",")));
-		  double y= Double.parseDouble(str.substring(1+str.indexOf(","),str.length()-1));
+		  String str = getPos(index);
+		  double x= 0;
+		  double y= 0;
+		  double a=0;
+		  if(!str.equals("")) {
+			  x= Double.parseDouble(str.substring(1,str.indexOf(",")));
+			  y= Double.parseDouble(str.substring(1+str.indexOf(","),str.indexOf("*")-1));
+			  a = Double.parseDouble(str.substring(1+str.indexOf("*")));
+			  x+=30;
+			  y+=21;		
+			  x*=600/60;
+			  y=624-(y*624/62);
+		  }
 		  
-		  x+=30;
-		  y+=21;		
-		  x*=600/60;
-		  y=624-(y*624/62);
-		  
-		  double[] xy = {x,y};
-		  return xy;
+		  double[] xya = {x,y,a};
+		  return xya;
 	  }
   }
   

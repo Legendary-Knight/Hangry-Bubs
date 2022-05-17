@@ -127,7 +127,20 @@ public class DominoTest extends TestbedTest  {
         fd.restitution = 0;
         myBody.createFixture(fd);
     	//draw.drawWoodBlock(0, 0);
+        
+        bd = new BodyDef();
+        bd.type = BodyType.DYNAMIC;
+        bd.position.set(-20f, 20f);
+        bd.bullet = true;
+        myBody = getWorld().createBody(bd);
+        circle = new CircleShape();
+        circle.m_radius = 2f;
 
+        fd = new FixtureDef();
+        fd.shape = circle;
+        fd.density = 10f; 
+        fd.restitution = 0;
+        myBody.createFixture(fd);
 
 
     } 
