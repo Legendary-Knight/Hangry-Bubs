@@ -154,6 +154,8 @@ public class TestbedModel {
 			  y+=21;		
 			  x*=600/60;
 			  y=624-(y*624/62);
+			  
+			  //a= Math.toDegrees(a);
 		  }
 		  
 		  double[] xya = {x,y,a};

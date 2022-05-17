@@ -260,7 +260,7 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
 	
 	double xyaB[] = model.getXYA(4);
 	MediumWoodBlock mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]);
-    mwb.paint(dbg);
+    mwb.paint(dbg, (int) xyaB[2]);
      //System.out.println("ooga");
 	if(gr==null) {
   		//System.out.println("booga");
