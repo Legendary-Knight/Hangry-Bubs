@@ -66,7 +66,7 @@ public class DominoTest extends TestbedTest  {
 	final TestbedModel TBM = new TestbedModel();
 	final TestPanelJ2D TPJ = new TestPanelJ2D(TBM);
 	final DebugDrawJ2D draw = new DebugDrawJ2D(TPJ);
-
+	public static boolean AngryBirdsMapIsLoaded =false;
   @Override
   public boolean isSaveLoadEnabled() {
     return true;
@@ -107,15 +107,9 @@ public class DominoTest extends TestbedTest  {
     }
 
     {
-    
-    	for(float j=0; j<=24; j+=8) {
-	    	for(float i=-24+j;i<=24-(j);i+=8) {
-	    		box(4.0f,4.0f,.3f,i,j+((j/3)*.3f));
-	    	}
-    	}
     	BodyDef bd = new BodyDef();
         bd.type = BodyType.DYNAMIC;
-        bd.position.set(10f, 10f);
+        bd.position.set(100f, 10f);
         bd.bullet = true;
         Body myBody = getWorld().createBody(bd);
         CircleShape circle = new CircleShape();
@@ -126,11 +120,16 @@ public class DominoTest extends TestbedTest  {
         fd.density = 10f; 
         fd.restitution = 0;
         myBody.createFixture(fd);
-    	//draw.drawWoodBlock(0, 0);
         
+    	for(float j=8; j<=24; j+=8) {
+	    	for(float i=-24+j;i<=24-(j);i+=8) {
+	    		box(4.0f,4.0f,.3f,i,(j-8)+(((j-8)/3)*.3f));
+	    	}
+    	}
+    	
         bd = new BodyDef();
         bd.type = BodyType.DYNAMIC;
-        bd.position.set(-20f, 20f);
+        bd.position.set(-100f, 20f);
         bd.bullet = true;
         myBody = getWorld().createBody(bd);
         circle = new CircleShape();
@@ -141,7 +140,7 @@ public class DominoTest extends TestbedTest  {
         fd.density = 10f; 
         fd.restitution = 0;
         myBody.createFixture(fd);
-
+        AngryBirdsMapIsLoaded =true;
 
     } 
   }

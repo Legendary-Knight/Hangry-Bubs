@@ -52,6 +52,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.testbed.framework.TestbedModel;
 import org.jbox2d.testbed.framework.TestbedPanel;
 import org.jbox2d.testbed.framework.TestbedTest;
+import org.jbox2d.testbed.tests.DominoTest;
 import org.jbox2d.testbed.tests.MediumWoodBlock;
 import org.jbox2d.testbed.tests.RedBird;
 import org.jbox2d.testbed.tests.SlingShot;
@@ -254,13 +255,26 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
     dbg.fillOval(30, 30, 30, 30);
     SlingShot ss = new SlingShot(100,490);
     ss.paint(dbg);
-    double xya[] = model.getXYA(0);
+    double[] xya = model.getXYA(0);
     RedBird rb = new RedBird((int) xya[0],(int) xya[1]);
 	rb.paint(dbg);
 	
-	double xyaB[] = model.getXYA(4);
-	MediumWoodBlock mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]);
-    mwb.paint(dbg, (int) xyaB[2]);
+	if(DominoTest.AngryBirdsMapIsLoaded) {
+		double[] xyaB = model.getXYA(3);
+		MediumWoodBlock mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
+		mwb.paint(dbg,xyaB[2]);
+		
+		for(int i=1; i<29; i++) {
+				xyaB = model.getXYA(i);
+				mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
+				mwb.paint(dbg,xyaB[2]);
+		}
+		dbg.fillOval((int) xyaB[0],(int) xyaB[1]+7, 5, 5);
+	}
+	
+	
+	
+    
      //System.out.println("ooga");
 	if(gr==null) {
   		//System.out.println("booga");

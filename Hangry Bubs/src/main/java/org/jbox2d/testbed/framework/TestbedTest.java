@@ -598,6 +598,14 @@ public abstract class TestbedTest
 	  return str;
   }
   
+  public Body getRedBirdBody()
+  {
+	  return m_world.getBodyList();
+  }
+  
+  public boolean isRedBirdCont() {
+	  return true;
+  }
   public synchronized void step(TestbedSettings settings) {
     float hz = settings.getSetting(TestbedSettings.Hz).value;
     float timeStep = hz > 0f ? 1f / hz : 0;

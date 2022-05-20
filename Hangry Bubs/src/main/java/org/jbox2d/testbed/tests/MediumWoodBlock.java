@@ -25,7 +25,7 @@ public class MediumWoodBlock{
 	private BufferedImage img; 	
 	private AffineTransform tx;
 	private double x =0,y=0;
-	private double scale =.50;
+	private double scale =.48;
 	private Graphics2D G2;
 	
 	public double getX() {
@@ -63,8 +63,9 @@ public class MediumWoodBlock{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} //load the image for Tree
-		this.x=x+520;
-		this.y=y+180;
+		this.x=x;
+		this.y=y;
+		
 		
 		//Graphics2D g2 = (Graphics2D) g;
 		//G2 = g2;
@@ -72,7 +73,7 @@ public class MediumWoodBlock{
 		update(); 				//initialize the location of the image
 									//use your variables
 	}
-	
+	/*
 	public MediumWoodBlock(int x, int y, int a) {
 		//System.out.println("redBird");
 		try {
@@ -81,8 +82,8 @@ public class MediumWoodBlock{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} //load the image for Tree
-		this.x=x+520;
-		this.y=y+180;
+		this.x=x+600;
+		this.y=y+100;
 		System.out.println("angle" + a);
 		//Graphics2D g2 = (Graphics2D) g;
 		//G2 = g2;
@@ -91,6 +92,7 @@ public class MediumWoodBlock{
 		update(); 				//initialize the location of the image
 									//use your variables
 	}
+	*/
 	/*
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
@@ -109,19 +111,22 @@ public class MediumWoodBlock{
 		System.out.println(a);
 		g.drawImage(img, tx, null);
 		*/
+		System.out.println("updating");
+		System.out.println("angle: "+ a);
 		a= (Math.PI/2)-a;
-		System.out.println("angle" + a);
+		//System.out.println("angle" + a);
 
 		// Drawing the rotated image at the required drawing locations
 		AffineTransform backup = g.getTransform();
 	    //rx is the x coordinate for rotation, ry is the y coordinate for rotation, and angle
 	    //is the angle to rotate the image. If you want to rotate around the center of an image,
 	    //use the image's center x and y coordinates for rx and ry.
-	    AffineTransform A = AffineTransform.getRotateInstance(a, x, y);
+
+	    AffineTransform A = AffineTransform.getRotateInstance(a, x, y); 
 	    //Set our Graphics2D object to the transform
 	    g.setTransform(A);
 	    //Draw our image like normal
-	    g.drawImage(img, (int) x,(int) y, null);
+	    g.drawImage(img, tx, null);
 	    //Reset our graphics object so we can draw with it again.
 	    g.setTransform(backup);
 
@@ -130,7 +135,7 @@ public class MediumWoodBlock{
 	}
 	
 	private void update() {
-		tx.setToTranslation(x,y);
+		tx.setToTranslation(x-42,y-5);
 		tx.scale(scale, scale);
 	}
 	

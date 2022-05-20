@@ -142,7 +142,8 @@ public class TestbedModel {
 		  return null;
 	  }
 	  else {
-		  String str = getPos(index);
+
+		  String str = getPos(index);  
 		  double x= 0;
 		  double y= 0;
 		  double a=0;
@@ -150,10 +151,22 @@ public class TestbedModel {
 			  x= Double.parseDouble(str.substring(1,str.indexOf(",")));
 			  y= Double.parseDouble(str.substring(1+str.indexOf(","),str.indexOf("*")-1));
 			  a = Double.parseDouble(str.substring(1+str.indexOf("*")));
+			  //System.out.println("x " + x);
+			  //System.out.println("y " + y);
+			  
+			  
+			  /*old measurements
 			  x+=30;
-			  y+=21;		
+			  y+=32;	
 			  x*=600/60;
 			  y=624-(y*624/62);
+			  */
+			  
+			  //new Measurements
+			  x+=84;
+			  y+=41;
+			  x*=1680/168;
+			  y=1015-(y*1015/101);
 			  
 			  //a= Math.toDegrees(a);
 		  }

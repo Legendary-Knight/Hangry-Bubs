@@ -44,8 +44,8 @@ public class RedBird{
 	public RedBird(int x, int y) {
 		//System.out.println("redBird");
 		img = getImage("/imgs/Red Bird.png"); //load the image for Tree
-		this.x=x+520;
-		this.y=y+180;
+		this.x=x-18;
+		this.y=y-13;
 
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		update(); 				//initialize the location of the image
