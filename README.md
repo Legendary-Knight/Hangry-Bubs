@@ -4,8 +4,28 @@ CONTENTS OF THIS FILE
 ---------------------
 
 * Introduction
-* Requirements
+* Features
+* Usage/examples
 * Installation
-* Configuration
-* Troubleshooting & FAQ
-* 
+* FAQ
+* Authors/maintainers
+
+INTRODUCTION
+------------
+
+Hangry Bubs is a 
+
+FEATURES
+----------
+
+USAGE/EXAMPLES
+-------------
+
+INSTALLATION
+----------
+
+FAQ
+------
+
+AUTHORS/MAINTAINERS
+---------------------
