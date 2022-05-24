@@ -1,6 +1,6 @@
 # Hangry-Bubs
 
-CONTENTS OF THIS FILE
+Table of Contents
 ---------------------
 
 * Introduction
@@ -10,22 +10,22 @@ CONTENTS OF THIS FILE
 * FAQ
 * Authors/maintainers
 
-INTRODUCTION
+Introduction
 ------------
 
 Hangry Bubs is a 
 
-FEATURES
+Features
 ----------
 
-USAGE/EXAMPLES
+Usage/Examples
 -------------
 
-INSTALLATION
+Installation
 ----------
 
 FAQ
 ------
 
-AUTHORS/MAINTAINERS
+Authors/Maintainers
 ---------------------
