@@ -18,6 +18,7 @@ Usage/Examples
 -------------
 
 **Starting the Game**
+
 To load the game, run *TestbedTest.java* and the Jbox2D Testbed application should appear on your screen. The application must be maximized to  fit the *entirety of your screen* else the game won't function properly.
 
 On the upper-righthand corner of screen, there should be a drop-down menu under the text *Choose a test*. Set it to *Hangury Burbs* to access our game. 
