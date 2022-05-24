@@ -13,7 +13,7 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 
-Hangry Bubs is a 
+Hangry Bubs is a strategy shooter game based off of the popular game series Angry Birds. It utilizes Jbox2D as its foundation so it displays several additional test cases (accessible in a drop-down menu) and other features (ex: AABBS, Contact Points, etc.) on the righthand side of the screen. 
 
 FEATURES
 ----------
