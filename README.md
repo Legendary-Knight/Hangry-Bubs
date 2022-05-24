@@ -1,8 +1,5 @@
 # Hangry-Bubs
 
-HANGRY BUBS
-============
-
 CONTENTS OF THIS FILE
 ---------------------
 
