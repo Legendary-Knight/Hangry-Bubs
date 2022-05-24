@@ -25,6 +25,10 @@ To load the game, run *TestbedTest.java* and the Jbox2D Testbed application shou
 
 On the upper-righthand corner of screen, there should be a drop-down menu under the text *Choose a test*. Set it to *Hangury Burbs* to access our game. 
 
+**How to Play Our Game**
+
+To shoot the bird, *press shift and hold down on the left mouse button* then move your mouse to aim the bird. *Release the left mouse button* in order to fire the bird. 
+
 Installation
 ----------
 
