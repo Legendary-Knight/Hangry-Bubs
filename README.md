@@ -51,8 +51,7 @@ In order for our game to function properly on Eclipse, you must have Jbox2D down
 
 To download and set up Jbox2D, please watch this video for guidance.
 
-*Video Instructions for Jbox2D:* 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8g9i3aJruh8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+*Video Instructions for Jbox2D:* https://youtu.be/8g9i3aJruh8
 
 Authors/Maintainers
 ---------------------
