@@ -46,10 +46,17 @@ The score can be found on the top-righthand corner of the screen. Points can be 
 Installation
 ----------
 
-In order for our game to function properly on Eclipse, you must have Jbox2D downloaded beforehand. Jbox2D is accessible on GitHub.
+In order for our game to function properly on Eclipse, you must have Jbox2D downloaded beforehand. Jbox2D is accessible on GitHub via a repository.
 
-*Github Link:* https://github.com/jbox2d/jbox2d
+*Github Repository Link for Jbox2D:* https://github.com/jbox2d/jbox2d
 
+![Screenshot (11)_LI](https://user-images.githubusercontent.com/89215866/170318056-89d931ec-89e3-4b16-ad72-0a261719bef2.jpg)
+
+On the repository page, go to the tags to access the most recent version of Jbox2D for download.
+
+![Screenshot (14)_LI](https://user-images.githubusercontent.com/89215866/170318421-ce63da08-a069-4679-b208-70525cde2265.jpg)
+
+Find version 2.2.1.1 (it should be the second recent version uploaded). Download the zipped file.  
 
 FAQ
 ------
