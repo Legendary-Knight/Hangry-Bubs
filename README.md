@@ -39,9 +39,9 @@ If you wish to reset the level, click on the *reset* button on the bottom-righth
 
 The score can be found on the top-righthand corner of the screen. Points can be earned by eliminating the pig as well as destroying the structure and completing the level with birds remaining. 
 
-10,000 points are awarded for *each bird that remains "unused" after destroying all the pigs.*
-500 points are awarded for *each plank that is destroyed.*
-5,000 points are awarded for *each pig that is destroyed.*
+* 10,000 points are awarded for *each bird that remains "unused" after destroying all the pigs.*
+* 500 points are awarded for *each plank that is destroyed.*
+* 5,000 points are awarded for *each pig that is destroyed.*
 
 Installation
 ----------
