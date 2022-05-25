@@ -49,17 +49,10 @@ In order for our game to function properly on Eclipse, you must have Jbox2D down
 
 *Github Repository Link for Jbox2D:* https://github.com/jbox2d/jbox2d
 
-![Screenshot (11)_LI](https://user-images.githubusercontent.com/89215866/170318056-89d931ec-89e3-4b16-ad72-0a261719bef2.jpg)
+To download and set up Jbox2D, please watch this video for guidance.
 
-On the repository page, go to the tags to access the most recent version of Jbox2D for download.
-
-![Screenshot (14)_LI](https://user-images.githubusercontent.com/89215866/170318421-ce63da08-a069-4679-b208-70525cde2265.jpg)
-
-Find version 2.2.1.1 (it should be the second recent version uploaded). Download the zipped file. 
-
-![Screenshot (17)](https://user-images.githubusercontent.com/89215866/170319523-f8025b6c-d120-4196-b386-0f7fcbe40a58.png)
-
-After the file is downloaded, extract it to a secure location. 
+*Video Instructions for Jbox2D:* 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8g9i3aJruh8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Authors/Maintainers
 ---------------------
