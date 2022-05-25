@@ -56,7 +56,11 @@ On the repository page, go to the tags to access the most recent version of Jbox
 
 ![Screenshot (14)_LI](https://user-images.githubusercontent.com/89215866/170318421-ce63da08-a069-4679-b208-70525cde2265.jpg)
 
-Find version 2.2.1.1 (it should be the second recent version uploaded). Download the zipped file.  
+Find version 2.2.1.1 (it should be the second recent version uploaded). Download the zipped file. 
+
+![Screenshot (17)](https://user-images.githubusercontent.com/89215866/170319523-f8025b6c-d120-4196-b386-0f7fcbe40a58.png)
+
+After the file is downloaded, extract it to a secure location. 
 
 FAQ
 ------
