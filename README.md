@@ -6,7 +6,6 @@ Table of Contents
 * Introduction
 * Usage/examples
 * Installation
-* FAQ
 * Authors/maintainers
 
 Introduction
@@ -17,7 +16,7 @@ Hangry Bubs is a strategy shooter game based off the popular game series Angry B
 Usage/Examples
 -------------
 
-The application must be maximized to  fit the *entirety of your screen* else the game won't function properly. Additionally, do not mess with any of the settings on the righthand side of the screen. Only touch the drop-down menu and buttons on the bottom-righthand corner of the screen. 
+The application must be maximized to fit the *entirety of your screen* else the game won't function properly. Additionally, do not mess with any of the settings on the righthand side of the screen. Only touch the drop-down menu and buttons on the bottom-righthand corner of the screen. 
 
 **Starting the Game**
 
@@ -61,9 +60,6 @@ Find version 2.2.1.1 (it should be the second recent version uploaded). Download
 ![Screenshot (17)](https://user-images.githubusercontent.com/89215866/170319523-f8025b6c-d120-4196-b386-0f7fcbe40a58.png)
 
 After the file is downloaded, extract it to a secure location. 
-
-FAQ
-------
 
 Authors/Maintainers
 ---------------------
