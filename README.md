@@ -12,7 +12,7 @@ Table of Contents
 Introduction
 ------------
 
-Hangry Bubs is a strategy shooter game based off the popular game series Angry Birds. It utilizes Jbox2D as its foundation so it displays several additional test cases (accessible through a drop-down menu) and other features (ex: AABBs, contact points, etc.) on the righthand side of the screen. This game was coded as a final project for Data Structures 1-2.
+Hangry Bubs is a strategy shooter game based off the popular game series Angry Birds. It utilizes Jbox2D as its foundation so it displays several additional test cases (accessible through a drop-down menu) and other features (ex: AABBs, contact points, etc.) on the righthand side of the screen. This game was coded as a final project for AP Comp Sci A to display our knowledge and ability at coding. 
 
 Usage/Examples
 -------------
@@ -30,6 +30,8 @@ On the upper-righthand corner of screen, there should be a drop-down menu under 
 **How to Play Our Game**
 
 To shoot the bird, *press shift and hold down on the left mouse button* then move your mouse to aim the bird. *Release the left mouse button* in order to fire the bird. 
+
+![Screenshot (6)_LI](https://user-images.githubusercontent.com/89215866/170313326-70bc2c1f-5cc5-44ae-869a-8452306d6fa6.jpg)
 
 If you wish to reset the level, click on the *reset* button on the bottom-righthand corner of the screen.
 
