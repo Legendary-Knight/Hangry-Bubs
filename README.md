@@ -49,9 +49,14 @@ In order for our game to function properly on Eclipse, you must have Jbox2D down
 
 *Github Repository Link for Jbox2D:* https://github.com/jbox2d/jbox2d
 
-To download and set up Jbox2D, please watch this video for guidance.
+To download and set up Jbox2D, please watch this video for guidance. Please note that some things in the video may be subject to change since you'll be using Eclipse.
 
 *Video Instructions for Jbox2D:* https://youtu.be/8g9i3aJruh8
 
+After Jbox2D is runnable on Eclipse, you're able to download our game onto Eclipse and enjoy!
+
 Authors/Maintainers
 ---------------------
+
+Lucas Solomon
+Tamara Nguyen 
