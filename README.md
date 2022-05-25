@@ -58,5 +58,5 @@ After Jbox2D is runnable on Eclipse, you're able to download our game onto Eclip
 Authors/Maintainers
 ---------------------
 
-Lucas Solomon
-Tamara Nguyen 
+* Lucas Solomon
+* Tamara Nguyen 
