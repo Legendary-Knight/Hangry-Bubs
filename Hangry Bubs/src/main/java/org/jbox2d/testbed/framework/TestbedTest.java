@@ -137,7 +137,14 @@ public abstract class TestbedTest
   private boolean dialogOnSaveLoadErrors = true;
 
   private boolean savePending, loadPending, resetPending = false;
-
+  private Fixture fixA;
+  private Fixture fixB;
+  private int score=0;
+  private ArrayList<Double> prevTMoment = new ArrayList<Double>(); 
+  private ArrayList<Double> prevAMoment = new ArrayList<Double>(); 
+  private ArrayList<Double> prevImpulse = new ArrayList<Double>(); 
+  private ArrayList<Double> prevTorque = new ArrayList<Double>(); 
+  static boolean RESET = false;
   public TestbedTest() {
 	
     inputQueue = new LinkedList<QueueItem>();
@@ -380,6 +387,10 @@ public abstract class TestbedTest
   public void reset() {
     resetPending = true;
   }
+  
+  public boolean isResetPending() {
+	  return resetPending;
+  }
 
   /**
    * Saves the test
@@ -571,6 +582,7 @@ public abstract class TestbedTest
   
   public String pos() {
 	  String str="";
+	 
 	  if(m_world.getBodyList().m_next!=null) {
 		  str = m_world.getBodyList().m_next.getPosition().toString();
 	  }
@@ -586,6 +598,10 @@ public abstract class TestbedTest
 	  return str;
 	  
   }
+
+  public int bodySize() {
+	  return m_world.getBodyCount();
+  }
   
   public String posIndex(int index) {
 	  String str="";
@@ -598,16 +614,163 @@ public abstract class TestbedTest
 	  return str;
   }
   
+  public double getMomentum(int index) {
+	  Body b= m_world.getBodyList();
+	  for(int i=0; i<index; i++) {
+		  b= b.m_next;
+	  }
+	  Vec2 vec = b.getLinearVelocity();
+	  double x= 0;
+	  double y= 0;
+	  String str = vec.toString();
+	  //System.out.println(str);
+	  x= Double.parseDouble(str.substring(1,str.indexOf(",")));
+	  y= Double.parseDouble(str.substring(1+str.indexOf(","), str.length()-1));
+	  //System.out.println("x: " + x + " y: " + y);
+	  Double speed = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
+	  //System.out.println("speed: " + speed);
+	  Double mass = (double) b.getMass();
+	  //System.out.println("mass: " + mass);
+	  Double Moment = speed*mass;
+	  return Moment;
+	  
+  }
+  
+  
+  
+
+  
+  
   public Body getRedBirdBody()
   {
 	  return m_world.getBodyList();
   }
   
-  public boolean isRedBirdCont() {
-	  return true;
+  public Contact getContList() {
+	  return m_world.getContactList();
   }
+  
+  public boolean isRedBirdCont() {
+	  if(m_world.getContactList()==null) {
+
+		  return false;
+	  }
+	  fixA = m_world.getContactList().getFixtureA();
+	  fixB = m_world.getContactList().getFixtureB();
+	  
+	  
+	  Body b= m_world.getBodyList();
+	  for(int i=0; i<bodySize()-2; i++) {
+		  b= b.m_next;
+	  }
+	  
+	  if(fixB.getBody()==m_world.getBodyList() && fixA.getBody()!= b) {
+		  //System.out.println("FAILED"); 
+		  return m_world.getContactList().isTouching();
+		  //return true;
+	  }
+	  
+	  return false;
+  }
+  
+  public Body getBodyB() {
+	  return fixB.getBody();
+  }
+  
+  public Body getBodyA() {
+	  return fixA.getBody();
+  }
+  
+  public void destroyBody() {
+	  boolean des = isRedBirdCont();
+	  if(des) {
+		  m_world.destroyBody(getBodyA());
+	  }
+  }
+  
+  public int getScore() {
+	  return score;
+  }
+  
+  public void Destruction() {
+	  
+	  for(int index=1; index<model.bodySize()-2; index++) {
+		  
+		  Body b= m_world.getBodyList();
+		  for(int i=0; i<index; i++) {
+			  b= b.m_next;
+		  }
+		  Vec2 vec = b.getLinearVelocity();
+		  double x= 0;
+		  double y= 0;
+		  String str = vec.toString();
+		  //System.out.println(str);
+		  x= Double.parseDouble(str.substring(1,str.indexOf(",")));
+		  y= Double.parseDouble(str.substring(1+str.indexOf(","), str.length()-1));
+		  //System.out.println("x: " + x + " y: " + y);
+		  Double speed = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
+		  //System.out.println("speed: " + speed);
+		  Double mass = (double) b.getMass();
+		  //System.out.println("mass: " + mass);
+		  Double Moment = speed*mass;
+		  
+		  Float angVel = b.getAngularVelocity();
+		  Float inertia = b.getInertia();
+		  //System.out.println("mass: " + mass);
+		  Double angMoment = (double) (Math.abs(angVel)*inertia);
+		  
+		  if(index-1> prevTMoment.size()-1) {
+			  prevTMoment.add(Moment);
+			  prevAMoment.add(angMoment);
+		  }
+		  else {
+			  Double impulse = Math.abs( Moment- prevTMoment.get(index-1));
+			  Double angImpulse = Math.abs(angMoment- prevAMoment.get(index-1));
+			  if(Math.abs(Moment)-Math.abs(prevTMoment.get(index-1))<0) {
+				  impulse*=-1;
+			  }
+			  if(Math.abs(angMoment)-Math.abs(prevAMoment.get(index-1))<0) {
+				  angImpulse*=-1;
+			  }
+			  
+
+			  
+			  prevTMoment.set(index-1, Moment);
+			  prevAMoment.set(index-1, angMoment);
+			  if(index-1> prevImpulse.size()-1) {
+				  prevImpulse.add(impulse);
+				  prevTorque.add(angImpulse);
+			  }
+			  else {
+				  //&& (Math.abs(prevImpulse.get(index-1)+impulse)<100)
+				  if((index!=1&&(prevImpulse.get(index-1)+prevTorque.get(index-1)<-1100  || prevTorque.get(index-1)<-600))|| prevImpulse.get(index-1)<-600 || prevImpulse.get(index-1)>600  ) {
+					  System.out.println("Angular Impulse: " + prevImpulse.get(index-1) + " Translation Impulse: " + prevTorque.get(index-1) + "Index: " + index);
+					  if(index==1) {
+						  
+						  score+=5000;
+					  }
+					  else {
+						  score+=500;
+					  }
+					  m_world.destroyBody(b);
+				  }
+				  prevImpulse.set(index-1, impulse);
+				  prevTorque.set(index-1, angImpulse);
+			  }
+		  }
+		  
+	  }
+  }
+  
+  
+  
+  
+  
+  
+  
   public synchronized void step(TestbedSettings settings) {
-    float hz = settings.getSetting(TestbedSettings.Hz).value;
+    //float hz = settings.getSetting(TestbedSettings.Hz).value;
+	  float hz=20;
     float timeStep = hz > 0f ? 1f / hz : 0;
     if (settings.singleStep && !settings.pause) {
       settings.pause = true;
@@ -680,6 +843,7 @@ public abstract class TestbedTest
     }
 
     if (settings.getSetting(TestbedSettings.DrawHelp).enabled) {
+    /*
       debugDraw.drawString(5, m_textLine, "Help", color4);
       m_textLine += 15;
       debugDraw.drawString(5, m_textLine, "Click and drag the left mouse button to move objects.",
@@ -696,6 +860,7 @@ public abstract class TestbedTest
       debugDraw.drawString(5, m_textLine, "Press '[' or ']' to change tests, and 'r' to restart.",
           Color3f.WHITE);
       m_textLine += 20;
+      */
     }
 
     if (!textList.isEmpty()) {
@@ -891,7 +1056,7 @@ public abstract class TestbedTest
   public void lanchBomb() {
 	System.out.println("LAUNCHBOMB");
     p.set((float) (Math.random() * 30 - 15), 30f);
-    v.set(p).mulLocal(-5f);
+    v.set(p).mulLocal(-10f);
     launchBomb(p, v);
     x+=1;
     y+=1;
