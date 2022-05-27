@@ -107,39 +107,28 @@ public class DominoTest extends TestbedTest  {
     }
 
     {
-    	BodyDef bd = new BodyDef();
-        bd.type = BodyType.DYNAMIC;
-        bd.position.set(100f, 10f);
-        bd.bullet = true;
-        Body myBody = getWorld().createBody(bd);
-        CircleShape circle = new CircleShape();
-        circle.m_radius = 1f;
+    	
 
-        FixtureDef fd = new FixtureDef();
-        fd.shape = circle;
-        fd.density = 10f; 
-        fd.restitution = 0;
-        myBody.createFixture(fd);
         
     	for(float j=8; j<=24; j+=8) {
 	    	for(float i=-24+j;i<=24-(j);i+=8) {
 	    		box(4.0f,4.0f,.3f,i,(j-8)+(((j-8)/3)*.3f));
 	    	}
     	}
-    	
-        bd = new BodyDef();
+    	BodyDef bd = new BodyDef();
         bd.type = BodyType.DYNAMIC;
-        bd.position.set(-100f, 20f);
+        bd.position.set(12f, 10f);
         bd.bullet = true;
-        myBody = getWorld().createBody(bd);
-        circle = new CircleShape();
+        Body myBody = getWorld().createBody(bd);
+        CircleShape circle = new CircleShape();
         circle.m_radius = 2f;
 
-        fd = new FixtureDef();
+        FixtureDef fd = new FixtureDef();
         fd.shape = circle;
         fd.density = 10f; 
         fd.restitution = 0;
         myBody.createFixture(fd);
+
         AngryBirdsMapIsLoaded =true;
 
     } 
@@ -195,6 +184,6 @@ public class DominoTest extends TestbedTest  {
   }
   @Override
   public String getTestName() {
-    return "Hangury Burbs";
+    return "Hangry Bubs";
   }
 }

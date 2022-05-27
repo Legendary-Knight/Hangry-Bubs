@@ -29,6 +29,7 @@ import java.awt.AWTError;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -42,6 +43,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -54,6 +56,7 @@ import org.jbox2d.testbed.framework.TestbedPanel;
 import org.jbox2d.testbed.framework.TestbedTest;
 import org.jbox2d.testbed.tests.DominoTest;
 import org.jbox2d.testbed.tests.MediumWoodBlock;
+import org.jbox2d.testbed.tests.Pig;
 import org.jbox2d.testbed.tests.RedBird;
 import org.jbox2d.testbed.tests.SlingShot;
 import org.slf4j.Logger;
@@ -89,6 +92,9 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
   private float x,y;
   private TestbedTest tests;
   private int count=0;
+  static int IND = 0;
+  static double prevMoment;
+  private ArrayList<Double> prevTMoment = new ArrayList<Double>();
   //private boolean bird=true;
   
 
@@ -251,25 +257,64 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
     
     dbg.setColor(Color.black);
     dbg.fillRect(0, 0, panelWidth, panelHeight);
-    dbg.setColor(Color.blue);
-    dbg.fillOval(30, 30, 30, 30);
-    SlingShot ss = new SlingShot(100,490);
-    ss.paint(dbg);
-    double[] xya = model.getXYA(0);
-    RedBird rb = new RedBird((int) xya[0],(int) xya[1]);
-	rb.paint(dbg);
-	
+    //dbg.setColor(Color.blue);
+    //dbg.fillOval(30, 30, 30, 30);
+
 	if(DominoTest.AngryBirdsMapIsLoaded) {
-		double[] xyaB = model.getXYA(3);
+		if(model.bodySize()>30) {
+			IND=1;
+		}
+		if(model.isResetPending()) {
+			IND=0;
+		}
+	    SlingShot ss = new SlingShot(100,490);
+	    ss.paint(dbg);
+	    Font f = new Font("ComicSans", Font.BOLD, 20);
+	    dbg.setFont(f);
+	    dbg.setColor(Color.white);
+	    String score = "Score: " + model.getScore();
+	    dbg.drawString(score , 1500, 10);
+	    if(IND!=0) {
+	    	double[] xya = model.getXYA(IND-1);
+	    	RedBird rb = new RedBird((int) xya[0],(int) xya[1]);
+	    	rb.paint(dbg);
+	    }
+		double[] xyaB = model.getXYA(IND);
+		Pig kingPig = new Pig((int) xyaB[0],(int) xyaB[1]);
+		kingPig.paint(dbg,xyaB[2]);
+		xyaB = model.getXYA(IND+1);
 		MediumWoodBlock mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
 		mwb.paint(dbg,xyaB[2]);
 		
-		for(int i=1; i<29; i++) {
-				xyaB = model.getXYA(i);
+		for(int i=2; i<(model.bodySize()-2-IND); i++) {
+				xyaB = model.getXYA(IND+i);
 				mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
 				mwb.paint(dbg,xyaB[2]);
 		}
-		dbg.fillOval((int) xyaB[0],(int) xyaB[1]+7, 5, 5);
+		//dbg.fillOval((int) xyaB[0],(int) xyaB[1]+7, 5, 5);
+		model.destruction();
+		/*
+		Double moment = model.getMomentum(0);
+		if(model.isCont()) {
+			double impulse = moment-prevMoment;
+			System.out.println("Previous Momentum: " + prevMoment + " Momentum: " + moment + " impulse: " + impulse);
+			if(Math.abs(impulse)>200) {	
+				model.destroyBody();
+			}
+			//System.out.println("contact");
+			
+		}
+		else {
+			//System.out.println("not in contact");
+		}
+		prevTMoment.add(moment);
+		count++;
+		if(count>=1) {
+			prevMoment = prevTMoment.get(count-1);
+		}
+		//count&=2;
+		//System.out.println(count);
+		*/
 	}
 	
 	

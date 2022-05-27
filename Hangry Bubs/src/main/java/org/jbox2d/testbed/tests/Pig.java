@@ -21,11 +21,11 @@ import org.jbox2d.testbed.framework.TestbedModel;
 import org.jbox2d.testbed.framework.j2d.DebugDrawJ2D;
 import org.jbox2d.testbed.framework.j2d.TestPanelJ2D;
 
-public class MediumWoodBlock{
+public class Pig{
 	private BufferedImage img; 	
 	private AffineTransform tx;
 	private double x =0,y=0;
-	private double scale =.48;
+	private double scale =.06;
 	private Graphics2D G2;
 	
 	public double getX() {
@@ -55,10 +55,10 @@ public class MediumWoodBlock{
 	}
 
 	
-	public MediumWoodBlock(int x, int y) {
+	public Pig(int x, int y) {
 		//System.out.println("redBird");
 		try {
-			img = ImageIO.read(new File("\\\\dohome4.pusd.dom\\home4$\\Student4\\1904731\\git\\Hangry-Bubs\\Hangry-Bubs\\Hangry-Bubs\\Hangry Bubs\\src\\main\\java\\imgs\\Medium Wood Plank.png"));
+			img = ImageIO.read(new File("\\\\dohome4.pusd.dom\\home4$\\Student4\\1904731\\git\\Hangry-Bubs\\Hangry-Bubs\\Hangry-Bubs\\Hangry Bubs\\src\\main\\java\\imgs\\King_Pig.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,7 +113,7 @@ public class MediumWoodBlock{
 		*/
 		//System.out.println("updating");
 		//System.out.println("angle: "+ a);
-		a= (Math.PI/2)-a;
+		a= -a;
 		//System.out.println("angle" + a);
 
 		// Drawing the rotated image at the required drawing locations
@@ -135,7 +135,7 @@ public class MediumWoodBlock{
 	}
 	
 	private void update() {
-		tx.setToTranslation(x-42,y-5);
+		tx.setToTranslation(x-25,y-35);
 		tx.scale(scale, scale);
 	}
 	
@@ -147,7 +147,7 @@ public class MediumWoodBlock{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = MediumWoodBlock.class.getResource(path);
+			URL imageURL = Pig.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
