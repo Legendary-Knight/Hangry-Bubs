@@ -11,11 +11,6 @@ Table of Contents
 Introduction
 ------------
 
-Hangry Bubs is a strategy shooter game based off the popular game series Angry Birds. It utilizes Jbox2D as its foundation so it displays several additional test cases (accessible through a drop-down menu) and other features (ex: AABBs, contact points, etc.) on the righthand side of the screen. This game was coded as a final project for AP Comp Sci A to display our knowledge and ability at coding. The objective of Hangry Bubs is to eliminate the pig by aiming a limited amount of birds directly at the pig or by causing the structure around the pig to collapse on the pig and damage it. 
-
-Usage/Examples
--------------
-
 The application must be maximized to fit the *entirety of your screen* else the game won't function properly. Additionally, do not mess with any of the settings on the righthand side of the screen. Only touch the drop-down menu and buttons on the bottom-righthand corner of the screen. 
 
 **Starting the Game**
