@@ -7,26 +7,13 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
-
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.testbed.framework.TestbedModel;
-import org.jbox2d.testbed.framework.j2d.DebugDrawJ2D;
-import org.jbox2d.testbed.framework.j2d.TestPanelJ2D;
-
 public class Pigs{
-	private BufferedImage img; 	
+	private Image img; 	
 	private AffineTransform tx;
 	private double x =0,y=0;
 	private double scale =.06;
-	private Graphics2D G2;
 	
 	public double getX() {
 		return x; 
@@ -54,88 +41,35 @@ public class Pigs{
 		this.scale = scale;
 	}
 
-	
 	public Pigs(int x, int y) {
 		//System.out.println("redBird");
-		try {
-			img = ImageIO.read(new File("\\\\dohome4.pusd.dom\\home4$\\Student4\\1904731\\git\\Hangry-Bubs\\Hangry-Bubs\\Hangry-Bubs\\Hangry Bubs\\src\\main\\java\\imgs\\King_Pig.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} //load the image for Tree
-		this.x=x;
-		this.y=y;
-		
-		
-		//Graphics2D g2 = (Graphics2D) g;
-		//G2 = g2;
+		img = getImage("/imgs/King_Pig.png"); //load the image for Tree
+		this.x=x-25;
+		this.y=y-35;
+
 		tx = AffineTransform.getTranslateInstance(0, 0);
 		update(); 				//initialize the location of the image
 									//use your variables
 	}
-	/*
-	public MediumWoodBlock(int x, int y, int a) {
-		//System.out.println("redBird");
-		try {
-			img = ImageIO.read(new File("\\\\dohome4.pusd.dom\\home4$\\Student4\\1904731\\git\\Hangry-Bubs\\Hangry-Bubs\\Hangry-Bubs\\Hangry Bubs\\src\\main\\java\\imgs\\Medium Wood Plank.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} //load the image for Tree
-		this.x=x+600;
-		this.y=y+100;
-		System.out.println("angle" + a);
-		//Graphics2D g2 = (Graphics2D) g;
-		//G2 = g2;
-		tx = AffineTransform.getTranslateInstance(0, 0);
-		tx.rotate(a);
-		update(); 				//initialize the location of the image
-									//use your variables
-	}
-	*/
-	/*
+	
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
 		update();
 	}
-	*/
 	
-	public void paint(Graphics2D g) {
+	public void paint(Graphics2D g, Double a) {
+		//these are the 2 lines of code needed draw an image on the screen
+		//System.out.println("paintRedBird");
+		//Graphics2D g2 = (Graphics2D) g;
+		//System.out.println("OOGA");
 		g.drawImage(img, tx, null);
-		update();
-		
-	}
-	
-	public void paint(Graphics2D g, double a) {
-		/*
-		System.out.println(a);
-		g.drawImage(img, tx, null);
-		*/
-		//System.out.println("updating");
-		//System.out.println("angle: "+ a);
-		a= -a;
-		//System.out.println("angle" + a);
-
-		// Drawing the rotated image at the required drawing locations
-		AffineTransform backup = g.getTransform();
-	    //rx is the x coordinate for rotation, ry is the y coordinate for rotation, and angle
-	    //is the angle to rotate the image. If you want to rotate around the center of an image,
-	    //use the image's center x and y coordinates for rx and ry.
-
-	    AffineTransform A = AffineTransform.getRotateInstance(a, x, y); 
-	    //Set our Graphics2D object to the transform
-	    g.setTransform(A);
-	    //Draw our image like normal
-	    g.drawImage(img, tx, null);
-	    //Reset our graphics object so we can draw with it again.
-	    g.setTransform(backup);
-
+		//System.out.println("bOOGA");
 		update();
 		
 	}
 	
 	private void update() {
-		tx.setToTranslation(x-25,y-35);
+		tx.setToTranslation(x,y);
 		tx.scale(scale, scale);
 	}
 	
@@ -147,7 +81,7 @@ public class Pigs{
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = Pigs.class.getResource(path);
+			URL imageURL = RedBird.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -156,3 +90,5 @@ public class Pigs{
 	}
 
 }
+
+

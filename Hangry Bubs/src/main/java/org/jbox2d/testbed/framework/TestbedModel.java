@@ -176,7 +176,12 @@ public class TestbedModel {
 		  return xya;
 	  }
   }
-  
+  public void setLives(int lives) {
+	  test.setLives(lives);
+  }
+  public void setScore(int score) {
+	  test.setScore(score);
+  }
   public void destruction() {
 	  test.Destruction();
   }

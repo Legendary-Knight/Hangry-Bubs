@@ -108,12 +108,33 @@ public class DominoTest extends TestbedTest  {
     }
 
     {
+    
     	
+    	
+    /*
+     * Comments
+     * 
+     * 
+     * 
+     */
+    	
+    /*
+     * Notes:
+     * Top 3 People will win chips
+     * left Click and drag on the slingshot to shoot bird 
+     * Hit both pigs to win
+     * Record top score and name and google sheets
+     * 
+     * Scoring
+     * 10000 for each bird left
+     * 5000 for each pig hit
+     * 500 for each wood broken
+     */
 
-        
+        float thickness =2f;
     	for(float j=8; j<=24; j+=8) {
 	    	for(float i=-24+j;i<=24-(j);i+=8) {
-	    		box(4.0f,4.0f,.3f,i*1.021f,(j-8)+(((j-8)/3)*.4f));
+	    		box(4.0f,4.0f,thickness,i*1.021f,(j-8)+(((j-8)/3)*(thickness+.1f)));
 	    	}
     	}
     	BodyDef bd = new BodyDef();

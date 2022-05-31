@@ -369,6 +369,12 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
   				LC.play();
   				soundPlayed=true;
   			}
+  			int lives=model.getLives();
+  			while(lives>=0) {
+  				model.setScore(model.getScore()+10000);
+  				lives--;
+  				model.setLives(lives);
+  			}
 		    Win wn = new Win(400,100);
 		    wn.paint(dbg);
 		    Font f = new Font("ComicSans", Font.BOLD, 40);

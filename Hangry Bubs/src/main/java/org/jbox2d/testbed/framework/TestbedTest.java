@@ -710,6 +710,10 @@ public abstract class TestbedTest
 	  return score;
   }
   
+  
+  /* Uses physics concepts of momentum and impulse to see if the object needs to be destroyed
+   * using the object class using the world class to the body class to the vector class to get its velocity and mass.
+   */
   public void Destruction() {
 	  
 	  for(int index=1; index<bodySize()-2; index++) {
@@ -792,7 +796,7 @@ public abstract class TestbedTest
 				  }
 				  prevImpulse.set(index-1, impulse);
 				  prevTorque.set(index-1, angImpulse);
-				  if(index-1==0) {
+				  if(index-1==0) { 
 				  //System.out.println("Angular Impulse: " + prevImpulse.get(index-1) + " Translation Impulse: " + prevTorque.get(index-1) + "Index: " + index);
 				  }
 			  }
@@ -845,7 +849,12 @@ public abstract class TestbedTest
   public int lives() {
 	  return lives;
   }
-  
+  public void setLives(int live) {
+	  lives=live;
+  }
+  public void setScore(int sc) {
+	  score=sc;
+  }
   
   
   
