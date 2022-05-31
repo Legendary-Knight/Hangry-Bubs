@@ -30,6 +30,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import org.jbox2d.testbed.framework.TestbedController.UpdateBehavior;
 import org.jbox2d.testbed.framework.j2d.TestPanelJ2D;
+import org.jbox2d.testbed.tests.Music;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +51,8 @@ public class TestbedMain {
     }
     TestbedModel model = new TestbedModel();
     TestbedPanel panel = new TestPanelJ2D(model); 
+	Music AB = new Music("AngryBirds.wav",true);
+	AB.play();
     TestList.populateModel(model);
     JFrame testbed = new TestbedFrame(model, panel, UpdateBehavior.UPDATE_CALLED);
     testbed.setVisible(true);

@@ -67,6 +67,7 @@ public class DominoTest extends TestbedTest  {
 	final TestPanelJ2D TPJ = new TestPanelJ2D(TBM);
 	final DebugDrawJ2D draw = new DebugDrawJ2D(TPJ);
 	public static boolean AngryBirdsMapIsLoaded =false;
+	public static int numberOfPigs=2;
   @Override
   public boolean isSaveLoadEnabled() {
     return true;
@@ -112,12 +113,12 @@ public class DominoTest extends TestbedTest  {
         
     	for(float j=8; j<=24; j+=8) {
 	    	for(float i=-24+j;i<=24-(j);i+=8) {
-	    		box(4.0f,4.0f,.3f,i,(j-8)+(((j-8)/3)*.3f));
+	    		box(4.0f,4.0f,.3f,i*1.021f,(j-8)+(((j-8)/3)*.4f));
 	    	}
     	}
     	BodyDef bd = new BodyDef();
         bd.type = BodyType.DYNAMIC;
-        bd.position.set(12f, 10f);
+        bd.position.set(12f, 10.5f);
         bd.bullet = true;
         Body myBody = getWorld().createBody(bd);
         CircleShape circle = new CircleShape();
@@ -129,6 +130,21 @@ public class DominoTest extends TestbedTest  {
         fd.restitution = 0;
         myBody.createFixture(fd);
 
+    	bd = new BodyDef();
+        bd.type = BodyType.DYNAMIC;
+        bd.position.set(-12f, 10.5f);
+        bd.bullet = true;
+        myBody = getWorld().createBody(bd);
+        circle = new CircleShape();
+        circle.m_radius = 2f;
+
+        fd = new FixtureDef();
+        fd.shape = circle;
+        fd.density = 10f; 
+        fd.restitution = 0;
+        myBody.createFixture(fd);
+		//Music AB = new Music("AngryBirds.wav",true);
+		//AB.play();
         AngryBirdsMapIsLoaded =true;
 
     } 
@@ -176,7 +192,7 @@ public class DominoTest extends TestbedTest  {
       bd.type = BodyType.DYNAMIC;
       System.out.println(friction);
       fd.friction = friction;
-      bd.position = new Vec2(x+width, y+height*2+thickness);
+      bd.position = new Vec2(x+width, (y)+height*2+(thickness+.1f));
       bd.angle = (float)Math.PI/2;
       myBody = getWorld().createBody(bd);
       myBody.createFixture(fd);
@@ -184,6 +200,6 @@ public class DominoTest extends TestbedTest  {
   }
   @Override
   public String getTestName() {
-    return "Hangry Bubs";
+    return "Hangry Bubs Level 1";
   }
 }

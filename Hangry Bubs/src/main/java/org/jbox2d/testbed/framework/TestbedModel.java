@@ -188,16 +188,31 @@ public class TestbedModel {
 	  return test.isRedBirdCont();
   }
   
+  public void destroy() {
+	  test.Destroy();
+  }
+  public boolean pigsDead() {
+	  return test.pigsDead();
+  }
+  public int getLives() {
+	  return test.getLives();
+  }
   public boolean isResetPending() {
 	  return test.isResetPending();
   }
-  
+  public int getIND() {
+	  return test.getIND();
+  }
   public Body getBB() {
 	  return test.getBodyB();
   }
   
   public void destroyBody(){
 	  test.destroyBody();
+  }
+  
+  public int getNumPigs() {
+	  return test.numPig();
   }
   
   public double getMomentum(int index) {

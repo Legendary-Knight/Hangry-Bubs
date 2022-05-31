@@ -54,11 +54,14 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.testbed.framework.TestbedModel;
 import org.jbox2d.testbed.framework.TestbedPanel;
 import org.jbox2d.testbed.framework.TestbedTest;
+import org.jbox2d.testbed.tests.Background;
 import org.jbox2d.testbed.tests.DominoTest;
 import org.jbox2d.testbed.tests.MediumWoodBlock;
+import org.jbox2d.testbed.tests.Music;
 import org.jbox2d.testbed.tests.Pig;
 import org.jbox2d.testbed.tests.RedBird;
 import org.jbox2d.testbed.tests.SlingShot;
+import org.jbox2d.testbed.tests.Win;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.awt.Image;
@@ -92,9 +95,12 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
   private float x,y;
   private TestbedTest tests;
   private int count=0;
-  static int IND = 0;
+  private int IND = 0;
   static double prevMoment;
   private ArrayList<Double> prevTMoment = new ArrayList<Double>();
+  private int level;
+  private int numPigs;
+  private boolean soundPlayed=false;
   //private boolean bird=true;
   
 
@@ -259,70 +265,11 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
     dbg.fillRect(0, 0, panelWidth, panelHeight);
     //dbg.setColor(Color.blue);
     //dbg.fillOval(30, 30, 30, 30);
+    Background bg = new Background(0,-310);
+    bg.paint(dbg);
 
-	if(DominoTest.AngryBirdsMapIsLoaded) {
-		if(model.bodySize()>30) {
-			IND=1;
-		}
-		if(model.isResetPending()) {
-			IND=0;
-		}
-	    SlingShot ss = new SlingShot(100,490);
-	    ss.paint(dbg);
-	    Font f = new Font("ComicSans", Font.BOLD, 20);
-	    dbg.setFont(f);
-	    dbg.setColor(Color.white);
-	    String score = "Score: " + model.getScore();
-	    dbg.drawString(score , 1500, 10);
-	    if(IND!=0) {
-	    	double[] xya = model.getXYA(IND-1);
-	    	RedBird rb = new RedBird((int) xya[0],(int) xya[1]);
-	    	rb.paint(dbg);
-	    }
-		double[] xyaB = model.getXYA(IND);
-		Pig kingPig = new Pig((int) xyaB[0],(int) xyaB[1]);
-		kingPig.paint(dbg,xyaB[2]);
-		xyaB = model.getXYA(IND+1);
-		MediumWoodBlock mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
-		mwb.paint(dbg,xyaB[2]);
-		
-		for(int i=2; i<(model.bodySize()-2-IND); i++) {
-				xyaB = model.getXYA(IND+i);
-				mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
-				mwb.paint(dbg,xyaB[2]);
-		}
-		//dbg.fillOval((int) xyaB[0],(int) xyaB[1]+7, 5, 5);
-		model.destruction();
-		/*
-		Double moment = model.getMomentum(0);
-		if(model.isCont()) {
-			double impulse = moment-prevMoment;
-			System.out.println("Previous Momentum: " + prevMoment + " Momentum: " + moment + " impulse: " + impulse);
-			if(Math.abs(impulse)>200) {	
-				model.destroyBody();
-			}
-			//System.out.println("contact");
-			
-		}
-		else {
-			//System.out.println("not in contact");
-		}
-		prevTMoment.add(moment);
-		count++;
-		if(count>=1) {
-			prevMoment = prevTMoment.get(count-1);
-		}
-		//count&=2;
-		//System.out.println(count);
-		*/
-	}
-	
-	
-	
-    
-     //System.out.println("ooga");
 	if(gr==null) {
-  		//System.out.println("booga");
+
   	}
     return true;
   } 
@@ -363,9 +310,84 @@ public class TestPanelJ2D extends JPanel implements TestbedPanel {
     		
     	//draw.drawRedBird(0, 0);
     	//draw.drawWoodBlock(0, 0);
-    	
+    	  
 
-    	
+
+    	  	numPigs= model.getNumPigs();
+    	  	IND=model.getIND();
+    		if(DominoTest.AngryBirdsMapIsLoaded) {
+    			level=1;
+        	    RedBird rb;
+        	    if(model.getLives()>=3) {
+        	    	rb = new RedBird(10,590);
+        	    	rb.paint(dbg);
+        	    }
+        	    if(model.getLives()>=2) {
+        			rb = new RedBird(60,590);
+        			rb.paint(dbg);
+        	    }
+        	    if(model.getLives()>=1) {
+        			rb = new RedBird(110,590);
+        			rb.paint(dbg);
+        	    }
+    			
+    		    SlingShot ss = new SlingShot(100,490);
+    		    ss.paint(dbg);
+    		    Font f = new Font("ComicSans", Font.BOLD, 20);
+    		    dbg.setFont(f);
+    		    dbg.setColor(Color.white);
+    		    String score = "Score: " + model.getScore();
+    		    dbg.drawString(score , 1500, 10);
+    		    if(IND!=0) {
+    		    	double[] xya = model.getXYA(IND-1);
+    		    	rb = new RedBird((int) xya[0],(int) xya[1]);
+    		    	rb.paint(dbg);
+    		    }
+    			double[] xyaB = model.getXYA(IND);
+    		    for(int i=IND; i<IND+numPigs; i++) {
+    		    	xyaB = model.getXYA(i);
+    				Pig kingPig = new Pig((int) xyaB[0],(int) xyaB[1]);
+    				kingPig.paint(dbg,xyaB[2]);
+    		    }
+
+    			MediumWoodBlock mwb;
+    			
+    			for(int i=numPigs; i<(model.bodySize()-2-IND); i++) {
+    					xyaB = model.getXYA(IND+i);
+    					mwb = new MediumWoodBlock((int) xyaB[0],(int) xyaB[1]+7);
+    					mwb.paint(dbg,xyaB[2]);
+    			}
+    			//dbg.fillOval((int) xyaB[0],(int) xyaB[1]+7, 5, 5);
+
+    			model.destruction();
+    			//model.destroy();
+    		}
+
+  		if(numPigs<=0) {
+  			if(!soundPlayed) {
+  				Music LC = new Music("LevelComplete.wav",false);
+  				LC.play();
+  				soundPlayed=true;
+  			}
+		    Win wn = new Win(400,100);
+		    wn.paint(dbg);
+		    Font f = new Font("ComicSans", Font.BOLD, 40);
+		    dbg.setFont(f);
+		    dbg.setFont(f);
+		    dbg.setColor(Color.white);
+		    String score = "" + model.getScore();
+		    dbg.drawString(score , 650, 530);
+		    f = new Font("ComicSans", Font.BOLD, 60);
+		    dbg.setFont(f);
+		    dbg.drawString(score , 980, 280);
+		    f = new Font("ComicSans", Font.BOLD, 100);
+		    dbg.setFont(f);
+		    dbg.drawString("" + level , 700, 250);
+		}
+	    Font f = new Font("ComicSans", Font.BOLD, 20);
+	    dbg.setFont(f);
+
+  		
         g.drawImage(dbImage, 0, 0, null);
         
         Toolkit.getDefaultToolkit().sync();

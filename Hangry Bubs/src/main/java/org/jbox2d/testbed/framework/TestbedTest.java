@@ -74,6 +74,8 @@ import org.jbox2d.serialization.pb.PbDeserializer;
 import org.jbox2d.serialization.pb.PbSerializer;
 import org.jbox2d.testbed.framework.j2d.DebugDrawJ2D;
 import org.jbox2d.testbed.framework.j2d.TestPanelJ2D;
+import org.jbox2d.testbed.tests.DominoTest;
+import org.jbox2d.testbed.tests.Music;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -144,7 +146,15 @@ public abstract class TestbedTest
   private ArrayList<Double> prevAMoment = new ArrayList<Double>(); 
   private ArrayList<Double> prevImpulse = new ArrayList<Double>(); 
   private ArrayList<Double> prevTorque = new ArrayList<Double>(); 
+  private ArrayList<Boolean> indDes = new ArrayList<Boolean>(); 
+  private ArrayList<Boolean> indDest = new ArrayList<Boolean>(); 
   static boolean RESET = false;
+  private double lastMoment;
+  private boolean pigDead=false;
+  private int lives =3; 
+  private int numPigs=DominoTest.numberOfPigs;
+  private int IND=0;
+  
   public TestbedTest() {
 	
     inputQueue = new LinkedList<QueueItem>();
@@ -389,6 +399,7 @@ public abstract class TestbedTest
   }
   
   public boolean isResetPending() {
+
 	  return resetPending;
   }
 
@@ -407,6 +418,11 @@ public abstract class TestbedTest
   }
 
   protected void _reset() {
+	IND=0;
+	score=0;
+	lives=3;
+	System.out.println("numPigs reset");
+	numPigs=DominoTest.numberOfPigs;
     init(model);
   }
 
@@ -603,6 +619,10 @@ public abstract class TestbedTest
 	  return m_world.getBodyCount();
   }
   
+  public int getIND() {
+	  return IND;
+  }
+  
   public String posIndex(int index) {
 	  String str="";
 	  Body b= m_world.getBodyList();
@@ -637,8 +657,11 @@ public abstract class TestbedTest
   }
   
   
-  
 
+
+  public int getLives() {
+	  return lives;
+  }
   
   
   public Body getRedBirdBody()
@@ -681,12 +704,7 @@ public abstract class TestbedTest
 	  return fixA.getBody();
   }
   
-  public void destroyBody() {
-	  boolean des = isRedBirdCont();
-	  if(des) {
-		  m_world.destroyBody(getBodyA());
-	  }
-  }
+
   
   public int getScore() {
 	  return score;
@@ -694,7 +712,7 @@ public abstract class TestbedTest
   
   public void Destruction() {
 	  
-	  for(int index=1; index<model.bodySize()-2; index++) {
+	  for(int index=1; index<bodySize()-2; index++) {
 		  
 		  Body b= m_world.getBodyList();
 		  for(int i=0; i<index; i++) {
@@ -722,6 +740,8 @@ public abstract class TestbedTest
 		  if(index-1> prevTMoment.size()-1) {
 			  prevTMoment.add(Moment);
 			  prevAMoment.add(angMoment);
+			  indDes.add(false);
+			  indDest.add(false);
 		  }
 		  else {
 			  Double impulse = Math.abs( Moment- prevTMoment.get(index-1));
@@ -743,25 +763,88 @@ public abstract class TestbedTest
 			  }
 			  else {
 				  //&& (Math.abs(prevImpulse.get(index-1)+impulse)<100)
-				  if((index!=1&&(prevImpulse.get(index-1)+prevTorque.get(index-1)<-1100  || prevTorque.get(index-1)<-600))|| prevImpulse.get(index-1)<-600 || prevImpulse.get(index-1)>600  ) {
-					  System.out.println("Angular Impulse: " + prevImpulse.get(index-1) + " Translation Impulse: " + prevTorque.get(index-1) + "Index: " + index);
-					  if(index==1) {
-						  
+				  if(indDes.get(index-1)==false && indDest.get(index-1)==false &&((index!=1 &&  (prevImpulse.get(index-1)+prevTorque.get(index-1)<-1100  || prevTorque.get(index-1)<-600))|| prevImpulse.get(index-1)<-600 || prevImpulse.get(index-1)>600)  ) {
+					  //System.out.println("Angular Impulse: " + prevImpulse.get(index-1) + " Translation Impulse: " + prevTorque.get(index-1) + "Index: " + index);
+					  if(index<=numPigs) {
+						  numPigs--;
+						  //System.out.println("Pig Died" + " Index: " + (index-1) + " IND Des: " + indDes.get(index-1));
 						  score+=5000;
+			  				Music PH = new Music("PigHit.wav",false);
+			  				PH.play();
 					  }
 					  else {
+						  Music WH = new Music("WoodHit.wav",false);
+			  				WH.play();
 						  score+=500;
 					  }
 					  m_world.destroyBody(b);
+					  indDes.set(index-1,true);
+					  indDest.set(index-1,true);
+				  }
+				  else {
+					  if(index-1==0) {
+					  //System.out.println("cleared " + (index-1));
+					  }
+					  if(indDes.get(index-1)==false) {
+						  indDest.set(index-1,false);
+					  }
+					  indDes.set(index-1,false);
 				  }
 				  prevImpulse.set(index-1, impulse);
 				  prevTorque.set(index-1, angImpulse);
+				  if(index-1==0) {
+				  //System.out.println("Angular Impulse: " + prevImpulse.get(index-1) + " Translation Impulse: " + prevTorque.get(index-1) + "Index: " + index);
+				  }
 			  }
 		  }
 		  
 	  }
   }
   
+  public void Destroy() {
+	  if(isRedBirdCont()) {
+			double impulse = getMomentum(0)-lastMoment;
+			//System.out.println("Previous Momentum: " + lastMoment + " Momentum: " + getMomentum(0) + " impulse: " + impulse);
+			if(Math.abs(impulse)>400) {	
+				boolean pg = false;
+				Body b= m_world.getBodyList();
+				for(int i=0; i<=numPigs; i++) {
+				  b= b.m_next;
+				  if(b.equals(getBodyA())) {
+					  pg=true;
+					  System.out.println("truebody matches");
+				  }
+				}
+				if(pg) {
+					score+=5000;
+					numPigs--;
+					Music PH = new Music("PigHit.wav",false);
+	  				PH.play();
+				}
+				else {
+					Music WH = new Music("WoodHit.wav",false);
+	  				WH.play();
+					score+=500;
+				}
+				model.destroyBody();
+			}
+	  }
+  }
+  
+  public void destroyBody() {
+		  m_world.destroyBody(getBodyA());
+  }
+  
+  public int numPig() {
+	  return numPigs;
+  }
+  public boolean pigsDead() {
+	  return pigDead;
+  }
+  
+  public int lives() {
+	  return lives;
+  }
   
   
   
@@ -981,8 +1064,13 @@ public abstract class TestbedTest
       mouseJoint = null;
     }
 
-    if (bombSpawning) {
+    if (bombSpawning && lives>0) {
+      Music RBF = new Music("RBF.wav",false);
+      RBF.play();
+      IND=1;
+      lives-=1;
       completeBombSpawn(p);
+      
     }
   }
 
@@ -1117,6 +1205,8 @@ public abstract class TestbedTest
     launchBomb(bombSpawnPoint, vel);
     bombSpawning = false;
   }
+  
+  
 
   /**
    * Override to enable saving and loading. Remember to also override the {@link ObjectListener} and
