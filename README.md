@@ -23,7 +23,7 @@ To load the game, run *TestbedTest.java* and the Jbox2D Testbed application shou
 
 ![Screenshot (3)_LI](https://user-images.githubusercontent.com/89215866/170085081-4a490139-9f25-4e0c-bbc7-ae1cd923f42d.jpg)
 
-On the upper-righthand corner of screen, there should be a drop-down menu under the text *Choose a test*. Set it to *Hangury Burbs* to access our game. 
+On the upper-righthand corner of screen, there should be a drop-down menu under the text *Choose a test*. Set it to *Hangry Bubs* to access our game. 
 
 **How to Play Our Game**
 
