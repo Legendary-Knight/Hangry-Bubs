@@ -27,6 +27,8 @@ On the upper-righthand corner of screen, there should be a drop-down menu under 
 
 **How to Play Our Game**
 
+ADD GIF OF SHOOTING BIRD HERE 
+
 To shoot the bird, *press shift and hold down on the left mouse button* then move your mouse to aim the bird. *Release the left mouse button* in order to fire the bird. 
 
 ![Screenshot (27)](https://user-images.githubusercontent.com/89215866/171455389-dc51bea0-02d3-4ee1-b75e-ae039ecb5030.png)
@@ -36,10 +38,6 @@ If you successfully complete the level, the win screen should appear, displaying
 ![Screenshot (6)_LI](https://user-images.githubusercontent.com/89215866/170313326-70bc2c1f-5cc5-44ae-869a-8452306d6fa6.jpg)
 
 If you wish to reset the level, click on the *reset* button on the bottom-righthand corner of the screen.
-
-** Gif of Gameplay**
-
-ADD GIF OF GAMEPLAY HERE LUCAS
 
 **Scoring**
 
