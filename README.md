@@ -31,6 +31,10 @@ To shoot the bird, *press shift and hold down on the left mouse button* then mov
 
 ![Screenshot (6)_LI](https://user-images.githubusercontent.com/89215866/170313326-70bc2c1f-5cc5-44ae-869a-8452306d6fa6.jpg)
 
+If you successfully complete the level, the win screen should appear, displaying the amount of points you earned in the level.
+
+![Screenshot (27)](https://user-images.githubusercontent.com/89215866/171455389-dc51bea0-02d3-4ee1-b75e-ae039ecb5030.png)
+
 If you wish to reset the level, click on the *reset* button on the bottom-righthand corner of the screen.
 
 **Scoring**
