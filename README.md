@@ -21,7 +21,7 @@ The application must be maximized to fit the *entirety of your screen* else the 
 
 To load the game, run *TestbedTest.java* and the Jbox2D Testbed application should appear on your screen. 
 
-![Screenshot (3)_LI](https://user-images.githubusercontent.com/89215866/170085081-4a490139-9f25-4e0c-bbc7-ae1cd923f42d.jpg)
+![Screenshot (28)_LI](https://user-images.githubusercontent.com/89215866/171456366-1ff0c8ba-9a82-468c-ae99-0a83b3b6184c.jpg)
 
 On the upper-righthand corner of screen, there should be a drop-down menu under the text *Choose a test*. Set it to *Hangry Bubs Level 1* to access our game. 
 
