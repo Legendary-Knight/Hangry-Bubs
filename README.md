@@ -27,7 +27,7 @@ On the upper-righthand corner of screen, there should be a drop-down menu under 
 
 **How to Play Our Game**
 
-ADD GIF OF SHOOTING BIRD HERE https://github.com/Legendary-Knight/Hangry-Bubs/blob/main/Hangry%20Bubs/src/main/java/imgs/ABG.gif
+https://github.com/Legendary-Knight/Hangry-Bubs/blob/main/Hangry%20Bubs/src/main/java/imgs/ABG.gif
 
 To shoot the bird, *press shift and hold down on the left mouse button* then move your mouse to aim the bird. *Release the left mouse button* in order to fire the bird. 
 
